@@ -10,7 +10,6 @@ const GeoMap = ({ width, height, project, mark }) => {
     const { geoserver, workspace, layers } = project;
 
     olInit(geoserver, workspace, layers);
-
     if (mark) drawXYs(mark, 'local');
 
     setZoom(false);

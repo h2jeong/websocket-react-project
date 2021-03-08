@@ -13,7 +13,12 @@ const { Content } = Layout;
 
 const MapPage = ({ history }) => {
   const user = useSelector(
-    ({ user }) => ({ project: user.project }),
+    ({ user }) => ({
+      id: user.user?.id,
+      project: user.project,
+      token: user.accessToken,
+      projects: user.projects
+    }),
     shallowEqual
   );
   const sensor = useSelector((state) => state.sensor, shallowEqual);
@@ -46,14 +51,6 @@ const MapPage = ({ history }) => {
 
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')).token
-    : null;
-
-  const projects = localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')).projects
-    : null;
-
   const sensors = sensor.reduce((acc, curr) => {
     acc[curr.name] = curr;
     return acc;
@@ -66,22 +63,24 @@ const MapPage = ({ history }) => {
   }, [window]);
 
   useEffect(() => {
-    if (!token) history.push('/login');
+    if (!user.token) history.push('/login');
 
-    dispatch(initializeSocket());
-  }, [token]);
+    dispatch(initializeSocket(user.id));
+  }, [user.token]);
 
   useEffect(() => {
     if (selected) return;
     let id = null;
     /* init recent project - Server development required */
-    if (projects) {
-      id = projects[0].id;
+    if (user.projects) {
+      id = user.projects[0].id;
     }
     // if (unit.recent_project) {
     //   id = unit.recent_project;
     // }
-    dispatch(selectProject(id)).then((res) => {
+    const config = { headers: { Authorization: user.token } };
+
+    dispatch(selectProject(id, config)).then((res) => {
       setSelected(res.payload[0]);
     });
   }, []);
@@ -110,12 +109,12 @@ const MapPage = ({ history }) => {
             style={{
               position: 'absolute',
               bottom: '1rem',
-              left: 'calc(50vw - 5rem)',
-              width: '10rem',
+              left: 'calc(50vw - 7rem)',
+              width: '14rem',
               background: '#ff4d4f'
             }}
             onClick={() => window.location.replace('/')}>
-            Socket disconnected.
+            Socket disconnected. Plz, Click!
           </Button>
         )}
       </Content>

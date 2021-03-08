@@ -47,7 +47,7 @@ function drawXY(latlng, focus, id, extend) {
    */
   if (!latlng) return;
 
-  const convertNum = latlng.map((el) => el * 1);
+  const convertNum = latlng.map(Number);
   // console.log('drawXY:', latlng, focus, id, extend, convertNum);
   const feature = updateMarker(...convertNum, id);
 
@@ -65,9 +65,8 @@ function drawXYs(latlngArray, id) {
    * @summary - When Click Map
    */
   if (!latlngArray.length) return;
-
   for (let i = 0; i < latlngArray.length; i += 1) {
-    const convertNum = latlngArray[i].map((el) => el * 1);
+    const convertNum = latlngArray[i].map(Number);
     addCircle(...convertNum, id);
   }
 

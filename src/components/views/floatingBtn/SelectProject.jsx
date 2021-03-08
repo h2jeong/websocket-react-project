@@ -11,19 +11,20 @@ const { Option } = Select;
 /* change project -> change layers */
 const SelectProject = () => {
   const user = useSelector(
-    ({ user }) => ({ project: user.project }),
+    ({ user }) => ({
+      project: user.project,
+      token: user.accessToken,
+      projects: user.projects
+    }),
     shallowEqual
   );
   const socket = useSelector((state) => state.socket, shallowEqual);
 
-  const projects = localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')).projects
-    : null;
-
   const dispatch = useDispatch();
 
   const onChangeProject = (value) => {
-    dispatch(selectProject(value)).then((res) => {
+    const config = { headers: { Authorization: user.token } };
+    dispatch(selectProject(value, config)).then((res) => {
       // console.log('changed:', res.payload);
       const changed = res.payload[0];
 
@@ -38,7 +39,7 @@ const SelectProject = () => {
     console.log('search:', value);
   };
 
-  if (!projects) {
+  if (!user.projects) {
     return <div>There is no Projects</div>;
   }
   return (
@@ -53,7 +54,7 @@ const SelectProject = () => {
       filterOption={(input, option) =>
         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }>
-      {projects?.map((prj) => (
+      {user.projects?.map((prj) => (
         <Option key={prj.id} value={prj.id}>
           {prj.name.toUpperCase()}
         </Option>

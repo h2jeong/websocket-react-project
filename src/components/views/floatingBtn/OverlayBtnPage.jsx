@@ -109,7 +109,7 @@ const OverlayBtn = ({ sensors }) => {
     setVisible(false);
     dispatch(logoutUser());
     dispatch(wsClosed());
-    localStorage.removeItem('userInfo');
+    localStorage.removeItem('persist:root');
     window.location.replace('/login');
   };
 

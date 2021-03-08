@@ -1,0 +1,385 @@
+@import '~antd/dist/antd.css';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar                                  {
+  width: 5px;
+  height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1B242F; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #04C2C9; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover{
+  background: #04C2; 
+}
+
+/* loading */
+.loading {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+}
+
+.login-form {
+  max-width: 300px;
+  margin: 17rem auto;
+}
+
+.login-form-button {
+  width: 100%;
+}
+
+.ant-layout-content {
+  position: relative;
+  z-index: 0;
+}
+
+.ant-layout-content > .ant-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  position: absolute;
+  z-index: 10;
+  background: transparent;
+  border: 0;
+}
+.overlayBtn {
+  top: 1rem;
+}
+.chatBtn {
+  top: 90vh;
+  right: 1rem;
+}
+
+.ant-layout-content > .ant-btn > .ant-avatar {
+  margin-bottom: 0.5rem;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.15),
+  0px 3px 5px 2px rgba(0, 0, 0, 0.10), 0px 2px 5px 2px rgba(0, 0, 0, 0.10) !important;
+}
+.ant-layout-content > .ant-btn > .ant-avatar:first-child {
+  margin-bottom: 1rem;
+}
+.ant-form-inline.btnPower {
+  padding: 0;
+}
+.btnRecord {
+  padding: 0.5rem 0 0.2rem
+}
+.btnRecord .ant-switch-checked {
+  background: #FF0066
+}
+
+.react-draggable {
+  position: absolute;
+  right: 1.6em;
+  top: 1em;
+  z-index: 100;
+  opacity: 100%;
+  color: rgba(0, 0, 0, 0.38);
+  font-size: 0.8rem;
+  border-width: thin;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12) !important;
+}
+.ant-layout-content .react-draggable {
+  width: calc(21rem + 5px);
+  max-height: 88vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.ant-collapse {
+  border-radius: 0 0 2px 0;
+  border: 0;
+  background-color: white;
+  /* border: thin solid #eee; */
+}
+.ant-collapse > .ant-collapse-item {
+  border-bottom: 0;
+  border-top: 1px dotted #d9d9d9
+}
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  padding: 0.8rem 2rem;
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+}
+
+.ant-collapse-icon-position-right > .ant-collapse-item > .ant-collapse-header {
+  text-align: right;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 0.8rem 3rem 0.8rem;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
+  top: 0.2rem;
+}
+
+.ant-collapse-content {
+  border: 0;
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.67);
+}
+.ant-collapse-content > .ant-collapse-content-box {
+  padding: 0
+}
+.ant-collapse-content-box > .ant-row {
+  padding: 0 0.8rem 0.8rem;
+  /* border-top: thin solid #ddd; */
+}
+.ant-form-inline {
+  justify-content: space-around;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.ant-form-inline .ant-form-item {
+  margin-right: 0
+}
+
+.ant-form-item-label > label {
+  font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.67);
+}
+
+
+.ant-switch.large {
+  padding: 0 0.3rem
+}
+
+.ant-switch-checked.btnRound {
+  background: #66CC66
+}
+
+.ant-switch-checked.btnSnap {
+  background: #33CCCC
+}
+
+/* .ant-switch-checked.btnSnap {
+  background: #FF9900
+} */
+
+.ant-switch-checked.btnForce {
+  background: #9966CC
+}
+
+.ant-form-item-control-input {
+  font-size: 0.7rem;
+  min-height: 30px
+}
+
+.float-label {
+  position: relative;
+}
+.float-label .label {
+  font-size: 0.7rem;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 12px;
+  top: 12px;
+  transition: 0.2s ease all;
+}
+
+.float-label .label-float {
+  top: 4px;
+  font-size: 0.3rem;
+  opacity: 0.5;
+}
+
+.ant-input {
+  padding: 16px 12px 4px 11px;
+}
+
+.underbarStyle {
+  border: 0;
+  border-bottom: 1px solid #bbb
+}
+.radiusTopLeftStyle {
+  border-top-left-radius: 12px;
+}
+.radiusBottomRightStyle {
+  border-Bottom-Right-radius: 12px;
+}
+
+.supportTitle_ {
+  margin: 0.8rem 0;
+}
+
+/* modal */
+.ant-modal {
+  top: 1rem;
+}
+
+.ant-modal-root .react-draggable {
+  width: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.darkMode .ant-modal-content, 
+.darkMode .ant-modal-header, 
+.darkMode .ant-modal-body, 
+.darkMode .ant-modal-footer {
+  background-color: #111; 
+  border: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+.darkMode .ant-modal-header {
+  background-color: #222; 
+}
+
+.ant-modal-footer {
+  padding-bottom: 1.5rem
+}
+
+.darkMode .ant-modal-title {
+  color: rgba(255, 255, 255, 0.8);
+}
+.darkMode .ant-modal-close {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.darkMode .ant-modal-body {
+  padding: 0.8rem
+}
+.darkMode .ant-form-item-label > label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.darkMode .ant-switch {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.darkMode .ant-switch-checked {
+  background-color: #1890ff;
+}
+.darkMode h5.ant-typography {
+  color: rgba(255, 255, 255, 0.8);
+}
+.darkMode .float-label .label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.darkMode .ant-input {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+}
+.darkMode .underbarStyle {
+  border-color:rgba(255, 255, 255, 0.5)
+}
+.ant-btn-background-ghost.btnInDark {
+  height: auto;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  border: 0;
+  padding: 3px 20px;
+  box-shadow: 0px 2px 2px -5px rgba(0, 0, 0, 0.7),
+    0px 2px 2px 2px rgba(0, 0, 0, 0.5), 0px 2px 2px 2px rgba(0, 0, 0, 0.3) !important;
+} 
+.btnInDark:focus, .btnInDark:hover {
+  color: #40a9ff
+}
+
+.divSpace {
+  padding-bottom: 1.5rem
+}
+
+.divSpace:last-child {
+  padding-bottom: 0;
+}
+.darkMode .divSpace p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.8rem;
+}
+.titleSmall {
+  padding-bottom: 0.5rem;
+}
+
+.darkMode .ant-select {
+  color: rgba(255,255,255, 0.8);
+  font-size: 0.9rem;
+}
+
+.darkMode .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  background-color: transparent;
+  border: 0;
+  box-shadow: 0px 2px 2px -4px rgba(0, 0, 0, 0.7),
+    0px 2px 2px 2px rgba(0, 0, 0, 0.5), 0px 2px 2px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.darkMode .ant-select-arrow {
+  color:rgba(255,255,255, 0.8)
+}
+.darkMode .ant-select-dropdown {
+  background-color: #999;
+}
+
+.darkMode .ant-tabs {
+  color: rgba(255,255,255, 0.8)
+}
+
+.darkMode .ant-tabs-top > .ant-tabs-nav::before {
+  border-color:rgba(255, 255, 255, 0.5)
+}
+
+/* chatMode */
+.chatMode .ant-comment-content-detail {
+  color: #465656;
+  font-size: 0.8rem
+}
+
+
+/* map */
+#ol,
+#naver {
+  position: absolute;
+  z-index: 1;
+}
+#naver {
+  z-index: 0;
+}
+.ol-zoom {
+  top: unset !important;
+  bottom: 1.6em !important;
+  left: 1em;
+}
+.ol-zoom-in,
+.ol-zoom-out {
+  background-color: #646464 !important;
+  opacity: 1 !important;
+}

@@ -13,7 +13,7 @@ const WS_MESSAGE = 'ws_message';
 const WS_ERROR = 'ws_error';
 
 const SOCKET =
-  process.env.REACT_APP_ENV === 'development'
+  process.env.REACT_APP_MODE === 'development'
     ? // ? 'ws://192.168.1.11:3003';
       'ws://127.0.0.1:3002'
     : 'ws://127.0.0.1:3003';
@@ -59,15 +59,12 @@ function checkStatus(status) {
 
 let sn = null;
 
-export function initializeSocket() {
+export function initializeSocket(userId) {
   return (dispatch) => {
-    const socket = new WebSocket(SOCKET);
-    const userId = localStorage.getItem('userInfo')
-      ? JSON.parse(localStorage.getItem('userInfo')).id
-      : null;
-    let reconnecting = false;
-
     if (!userId) return dispatch(wsClosed());
+
+    const socket = new WebSocket(SOCKET);
+    let reconnecting = false;
 
     dispatch(wsInit(socket));
 
@@ -160,7 +157,7 @@ export function initializeSocket() {
         }, 2000);
       }
 
-      // INIT
+      // temporary INIT - check required
       dispatch(wsClosed());
       sn && subtractVhcl(sn);
       dispatch(clearSensor());

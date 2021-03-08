@@ -16,11 +16,7 @@ export function loginUser(loginData) {
   return { type: LOGIN_USER, payload: request };
 }
 
-export function selectProject(id) {
-  const token = localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')).token
-    : null;
-  const config = { headers: { Authorization: token } };
+export function selectProject(id, config) {
   const request = axios
     .get(`${tower}/api/projects?id=${id}`, config)
     .then((res) => res.data);

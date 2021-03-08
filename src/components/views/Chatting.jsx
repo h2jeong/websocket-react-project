@@ -6,14 +6,12 @@ import { MessageOutlined, EnterOutlined } from '@ant-design/icons';
 import ChatCard from './ChatCard';
 
 const Chatting = ({ recipientId }) => {
+  const user = useSelector((state) => state.user);
   const socket = useSelector((state) => state.socket, shallowEqual);
   const chats = useSelector((state) => state.chat.chats, shallowEqual);
   const [msg, setMsg] = useState('');
 
   const UserImage = `http://gravatar.com/avatar/${moment().unix()}?d=identicon`;
-  const userId = localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')).id
-    : null;
 
   /* Load previous chat list - Server development required */
   // useEffect(() => {
@@ -44,7 +42,7 @@ const Chatting = ({ recipientId }) => {
     const chatMsg = {
       type: 'message',
       msg_type: 'chat',
-      sender: { id: userId, imageUrl: UserImage },
+      sender: { id: user.user.id, imageUrl: UserImage },
       recipient: recipientId,
       text: msg,
       date: moment()

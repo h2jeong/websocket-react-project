@@ -1,38 +1,29 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Form, Input, Button, message } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { loginUser } from '../../../store/user';
 
 const LoginPage = ({ history }) => {
+  const user = useSelector(
+    ({ user }) => ({ token: user.accessToken }),
+    shallowEqual
+  );
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem('userInfo')
-    ? JSON.parse(localStorage.getItem('userInfo')).token
-    : null;
   const STRATEGY = 'local';
 
   useEffect(() => {
-    if (token) history.push('/');
-  }, [token]);
+    if (user.accessToken) history.push('/');
+  }, [user.accessToken]);
 
   const onFinish = (values) => {
     const loginData = { ...values, strategy: STRATEGY };
 
     dispatch(loginUser(loginData))
       .then((res) => {
-        const { user, accessToken } = res.payload;
-
-        localStorage.setItem(
-          'userInfo',
-          JSON.stringify({
-            id: user.id,
-            token: accessToken,
-            projects: user.projects
-          })
-        );
-        history.push('/');
+        if (res) history.push('/');
       })
       .catch((err) => {
         // console.log('login error:', err);

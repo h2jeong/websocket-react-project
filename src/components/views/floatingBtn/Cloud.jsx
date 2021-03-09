@@ -4,7 +4,7 @@ import { updatePoints } from '../../../../plugins/cloud/socket';
 
 /* lidar pointCloud data - Server development required */
 const Cloud = ({ lidarData }) => {
-  // TODO: cloud dom 연결하기 useRef? canvas 비율 확인하기 onWindowResize
+  // TODO: cloud dom 연결하기 canvas (4/5) 비율 확인하기 onWindowResize
   const [cloud, setCloud] = useState(null);
   // console.log('cloud id:', cloud, lidarData);
   useEffect(() => {
@@ -18,6 +18,7 @@ const Cloud = ({ lidarData }) => {
       setCloud(null);
     };
   }, []);
+
   useEffect(() => {
     if (!lidarData) return;
 

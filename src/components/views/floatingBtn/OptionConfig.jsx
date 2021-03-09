@@ -26,8 +26,10 @@ const OptionConfig = ({ configs, changeConfigs }) => {
   const renderArgosInfo = () => {
     const infos = Object.keys(unit.info);
     let items = [];
+
     for (let i = 0; i < infos.length; i += 1) {
       let title = infos[i][0].toUpperCase() + infos[i].slice(1);
+
       items.push(
         <p key={title}>
           {title} : {unit.info[infos[i]]}
@@ -69,22 +71,6 @@ const OptionConfig = ({ configs, changeConfigs }) => {
             className="underbarStyle"
             name="autoControl"
             value={configs.autoControl}
-            onChange={onHandleChange}
-          />
-        </FloatLabel>
-        <FloatLabel label="Argument 3" name="aaa" value={configs.aaa}>
-          <Input
-            className="underbarStyle"
-            name="aaa"
-            value={configs.aaa}
-            onChange={onHandleChange}
-          />
-        </FloatLabel>
-        <FloatLabel label="Argument 4" name="bbb" value={configs.bbb}>
-          <Input
-            className="underbarStyle"
-            name="bbb"
-            value={configs.bbb}
             onChange={onHandleChange}
           />
         </FloatLabel>

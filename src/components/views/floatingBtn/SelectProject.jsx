@@ -24,8 +24,8 @@ const SelectProject = () => {
 
   const onChangeProject = (value) => {
     const config = { headers: { Authorization: user.token } };
+
     dispatch(selectProject(value, config)).then((res) => {
-      // console.log('changed:', res.payload);
       const changed = res.payload[0];
 
       changeLayers(changed.geoserver, changed.workspace, changed.layers);

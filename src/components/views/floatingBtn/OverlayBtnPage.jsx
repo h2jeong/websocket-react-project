@@ -26,9 +26,7 @@ const OverlayBtn = ({ sensors }) => {
   /* setting config options - Server development required */
   const [configs, setConfigs] = useState({
     triggerDistance: '',
-    autoControl: 'off',
-    aaa: 'aaa',
-    bbb: 'bbb'
+    autoControl: 'off'
   });
 
   const dispatch = useDispatch();

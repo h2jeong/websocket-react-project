@@ -47,7 +47,7 @@ const Chatting = ({ recipientId }) => {
       text: msg,
       date: moment()
     };
-    // console.log('socket', socket.socket);
+
     if (!socket.socket) {
       message.info('Socket is closed. Refresh the page.', 5);
       return;

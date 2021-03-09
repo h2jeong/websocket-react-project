@@ -8,7 +8,7 @@ import { mutatePhase } from '../../../../store/phase';
 const TIMER = process.env.REACT_APP_ENV === 'development' ? 3 : 300;
 
 /* round switch */
-const RoundStatus = ({ phase }) => {
+const RoundStatus = ({ phase, sensors }) => {
   const [round, setRound] = useState(false);
   const [timer, setTimer] = useState(TIMER);
   const [timeTick, setTimeTick] = useState(null);
@@ -24,14 +24,14 @@ const RoundStatus = ({ phase }) => {
     setRound(!!phase.status || phase.recording);
   }, [phase]);
 
-  // useEffect(() => {
-  //   if (sensors.gnss && timeTick && !round) {
-  //     if (sensors.gnss.status?.speed * 1 > 0) {
-  //       message.info('Do not move while preparing for the round.', 5);
-  //       pauseTimer();
-  //     }
-  //   }
-  // }, [sensors, timeTick]);
+  useEffect(() => {
+    if (sensors.gnss && timeTick) {
+      if (sensors.gnss.status?.speed * 1 > 0) {
+        message.warn('Unable to start. Stop the vihicle.', 5);
+        pauseTimer();
+      }
+    }
+  }, [sensors, timeTick]);
 
   useEffect(() => {
     let percent = (100 - (timer / TIMER) * 100).toFixed();
@@ -72,6 +72,7 @@ const RoundStatus = ({ phase }) => {
       if (seconds === 0) {
         dispatch(mutatePhase('round'));
         clearInterval(timeTick);
+        setTimeTick(null);
       }
       setTimer(seconds--);
     }, 1000);
@@ -80,6 +81,7 @@ const RoundStatus = ({ phase }) => {
 
   const pauseTimer = () => {
     if (timeTick) clearInterval(timeTick);
+    setTimeTick(null);
   };
 
   const stopTimer = () => {
@@ -102,7 +104,7 @@ const RoundStatus = ({ phase }) => {
     <>
       <Form.Item label="ROUND">
         <Switch
-          checked={round}
+          checked={!!phase.status || phase.recording}
           checkedChildren={<CarOutlined id="ROUND" />}
           unCheckedChildren={<FolderAddOutlined id="ROUND" />}
           className="btnRound large"

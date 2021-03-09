@@ -44,8 +44,8 @@ const MapPage = ({ history }) => {
   );
 
   const [clientSize, setClientSize] = useState({
-    width: 1536,
-    height: 754
+    width: window.innerWidth,
+    height: window.innerHeight
   });
   const [selected, setSelected] = useState(user.project);
 

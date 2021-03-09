@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 
+/** click + touch event */
 const useLongPress = (
   onLongPress,
   onClick,

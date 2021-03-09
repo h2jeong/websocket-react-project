@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 const useAudio = () => {
   const [audio] = useState(
+    /** alarm sound required */
     // new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')
     new Audio()
   );

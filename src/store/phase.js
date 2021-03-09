@@ -41,36 +41,3 @@ export default function reducer(state = initialState, action) {
       return state;
   }
 }
-
-/*
-state : {
-    epic: {
-        rounds: [
-            "abc_20201212000000", "abc_202012123000000"
-        ],
-        "abc_20201212000000" : {
-            snaps : ['snap_202012120001','snap_202012120002','snap_202012120003','snap_202012120004'],
-            uuid: 'asdflkdj',
-            date: '20201212000000',
-            gnss: { date: '202012120000'},
-            'snap_202012120004': {
-                uuid: 'dfdfdfds',
-                date: '20201212000000',
-                latlngs : { start: 10, end: 10 }
-            }
-        },
-        "abc_20201213000000" : {
-            snaps : [],
-            uuid: 'fsdflkdj',
-            date: '20201213000000',
-            gnss: { date: '202012130000'}
-        },
-        currentRound: "abc_20201212000000",
-        currentSnap: 'snap_202012120004',
-        lastSnap: 'snap_202012120004',
-
-    },
-    phase: 'round', // snap
-    latlngs: [...]
-}
-*/

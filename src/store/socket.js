@@ -2,7 +2,7 @@ import { message } from 'antd';
 import { afterPostMessage } from './chat';
 import { setUnit, updateInfo, clearUnit } from './unit';
 import { clearSensor, setStatus, updateMonitor } from './sensor';
-import { checkPhase, checkRecording } from './phase';
+import { checkPhase, checkRecording, clearPhase } from './phase';
 import { subtractVhcl } from '../plugins/map/draw';
 
 /* webSocket */
@@ -13,19 +13,16 @@ const WS_MESSAGE = 'ws_message';
 const WS_ERROR = 'ws_error';
 
 const SOCKET =
-  process.env.REACT_APP_MODE === 'development'
-    ? // ? 'ws://192.168.1.11:3003';
-      'ws://127.0.0.1:3002'
-    : 'ws://127.0.0.1:3003';
+  process.env.REACT_APP_ENV === 'development'
+    ? 'ws://127.0.0.1:3002' // for jsonserver
+    : 'ws://192.168.1.11:3003'; // for driving test => required for deploy
 const initialState = { connected: false, readyState: null, socket: null };
 
 function wsInit(socket) {
-  console.log('WebSocket Init:', socket);
   return { type: WS_INIT, payload: socket };
 }
 
 function wsConnected() {
-  message.info('WebSocket Connected.');
   return { type: WS_CONNECTED };
 }
 
@@ -38,15 +35,13 @@ function wsMessage(data) {
   return { type: WS_MESSAGE, payload: data };
 }
 
-function wsError(e) {
-  console.log('WebSocket Error:', e);
+function wsError() {
   return { type: WS_ERROR };
 }
 
 function decodingImage(base64Data) {
   const image = new Image();
   image.src = `data:image/jpg;base64,${base64Data}`;
-  // image.src = base64Data
   return image;
 }
 
@@ -96,13 +91,11 @@ export function initializeSocket(userId) {
           dispatch(afterPostMessage(msg));
           break;
         case 'init_msg': {
-          // console.log('init_msg', msg.msg_type, msg);
           dispatch(setUnit(msg));
           sn = msg?.serial_number;
           break;
         }
         case 'argos_status': {
-          // console.log('argos_status', msg.msg_type, msg);
           const {
             connected,
             recorded,
@@ -111,7 +104,6 @@ export function initializeSocket(userId) {
             moving_distance,
             recording_distance,
             storage
-            // power, connected, ready, recorded, user_count, working_time, moving_distance, recording_distance, storage
           } = msg;
           const info = {
             user_count,
@@ -129,7 +121,6 @@ export function initializeSocket(userId) {
         }
         case 'monitor': {
           const { lidar, gnss, camera, image, pcd, mark } = msg;
-          // console.log('monitor: ', msg);
           const convertImages =
             image && image.length > 0 && image.map((img) => decodingImage(img));
           const dataToSubmit = {
@@ -150,6 +141,7 @@ export function initializeSocket(userId) {
 
       if (socket.socket) {
         if (reconnecting) return;
+
         reconnecting = true;
         setTimeout(() => {
           reconnecting = false;
@@ -159,9 +151,10 @@ export function initializeSocket(userId) {
 
       // temporary INIT - check required
       dispatch(wsClosed());
-      sn && subtractVhcl(sn);
       dispatch(clearSensor());
       dispatch(clearUnit());
+      dispatch(clearPhase());
+      sn && subtractVhcl(sn);
     };
   };
 }
@@ -175,7 +168,6 @@ export default function reducer(state = { ...initialState }, action) {
     case WS_CLOSED:
       return { ...state, connected: false, socket: null };
     case WS_MESSAGE:
-      console.log('message:', action.payload);
       return { ...state, data: action.payload };
     case WS_ERROR:
       return { ...state, connected: false };

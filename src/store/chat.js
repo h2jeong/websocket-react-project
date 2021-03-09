@@ -21,7 +21,6 @@ export default function reducer(state = initialState, action) {
     case GET_CHATS:
       return { ...state, chats: action.payload };
     case AFTER_POST_MESSAGE:
-      console.log('chats:', action.payload);
       return { ...state, chats: state.chats.concat(action.payload) };
     default:
       return state;

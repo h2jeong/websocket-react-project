@@ -55,7 +55,6 @@ export function clearSensor() {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_STATUS: {
-      // console.log('setStatus:', action.payload);
       const { power, connected, ready, recorded } = action.payload;
       const names = Object.keys(power);
 
@@ -89,7 +88,6 @@ export default function reducer(state = initialState, action) {
     case UPDATE_MONITOR: {
       const monitor = action.payload;
       const names = Object.keys(monitor);
-      // console.log('UPDATE_MONITOR:', monitor, names);
 
       return state.map((sensor) =>
         names.indexOf(sensor.name) > -1
@@ -100,14 +98,6 @@ export default function reducer(state = initialState, action) {
             }
           : sensor
       );
-      // return state.map((sensor) =>
-      //   names.indexOf(sensor.name) > -1
-      //     ? {
-      //         ...sensor,
-      //         status: { ...monitor[sensor.name] }
-      //       }
-      //     : sensor
-      // );
     }
     case CLEAR_SENSOR:
       return initialState;
